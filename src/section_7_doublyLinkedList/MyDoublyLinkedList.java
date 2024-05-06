@@ -3,12 +3,12 @@ package section_7_doublyLinkedList;
 public class MyDoublyLinkedList {
 	private Node head;
 	private Node tail;
-	private  int length;
+	private int length;
 	
-	class Node{
-		int value;
-		Node next;
-		Node prev;
+	public class Node{
+		private int value;
+		private Node next;
+		private Node prev;
 		
 		public Node(int value) {
 			this.value=value;
@@ -24,7 +24,7 @@ public class MyDoublyLinkedList {
 	
 	public void printList() {
 		Node temp=head;
-		while(temp!=null){
+		while(temp!=null) {
 			System.out.print(temp.value+"<->");
 			temp=temp.next;
 		}
@@ -34,11 +34,11 @@ public class MyDoublyLinkedList {
 	public void getHead() {
 		System.out.println("Head:"+head.value);
 	}
-
+	
 	public void getTail() {
 		System.out.println("Tail:"+tail.value);
 	}
-
+	
 	public void getLength() {
 		System.out.println("Length:"+length);
 	}
@@ -50,9 +50,10 @@ public class MyDoublyLinkedList {
 			tail=newNode;
 		}
 		else {
-			newNode.prev=tail;
 			tail.next=newNode;
+			newNode.prev=tail;
 			tail=newNode;
+			
 		}
 		length++;
 	}
@@ -63,10 +64,9 @@ public class MyDoublyLinkedList {
 			head=newNode;
 			tail=newNode;
 		}else {
-			head.prev=newNode;
 			newNode.next=head;
-			head=newNode;
-			
+			head.prev=newNode;
+			head=head.prev;
 		}
 		length++;
 	}
@@ -75,20 +75,22 @@ public class MyDoublyLinkedList {
 		if(index<0 || index>=length) {
 			return null;
 		}
-		Node temp=head;
+		Node temp;
 		if(index<length/2) {
+			temp=head;
 			for(int i=0;i<index;i++) {
 				temp=temp.next;
 			}
+			
 		}
 		else {
 			temp=tail;
-			for(int j=length-1;j>index;j--) {
+			for(int i=length-1;i>index;i--) {
 				temp=temp.prev;
-				}
 			}
+			
+		}
 		return temp;
-
 	}
 	
 	public boolean insert(int index,int value) {
@@ -104,17 +106,15 @@ public class MyDoublyLinkedList {
 			append(value);
 			return true;
 		}
-		Node before=get(index-1);
-		Node after=before.next;
-		newNode.next=after;
-		newNode.prev=before;
-		after.prev=newNode;
+		Node temp=get(index);
+		Node before=temp.prev;
 		before.next=newNode;
+		newNode.prev=before;
+		newNode.next=temp;
+		temp.prev=newNode;
 		length++;
 		return true;
-		
 	}
-	
 	
 	public Node removeFirst() {
 		Node temp=head;
@@ -129,7 +129,6 @@ public class MyDoublyLinkedList {
 			head=head.next;
 			head.prev=null;
 			temp.next=null;
-			
 		}
 		length--;
 		return temp;
@@ -174,7 +173,7 @@ public class MyDoublyLinkedList {
 		return temp;
 	}
 	
-	public boolean set(int index,int value) {
+	public boolean set(int index, int value) {
 		Node temp=get(index);
 		if(temp!=null) {
 			temp.value=value;
@@ -188,7 +187,7 @@ public class MyDoublyLinkedList {
 		head=tail;
 		tail=temp;
 		Node before=null;
-		Node after=temp.next;
+		Node after= temp.next;
 		for(int i=0;i<length;i++) {
 			after=temp.next;
 			temp.next=before;
@@ -198,6 +197,8 @@ public class MyDoublyLinkedList {
 		}
 		
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

@@ -5,8 +5,8 @@ public class MyStack {
 	private int height;
 	
 	public class Node{
-		int value;
-		Node next;
+		private int value;
+		private Node next;
 		
 		public Node(int value) {
 			this.value=value;
@@ -17,16 +17,18 @@ public class MyStack {
 		Node newNode=new Node(value);
 		top=newNode;
 		height=1;
+		
 	}
 	
 	public void printStack() {
 		Node temp=top;
-		System.out.println("\t"+"top"+"\t");
+		System.out.println("|\t"+"top"+"\t|");
 		while(temp!=null) {
-			System.out.println("|"+"\t"+temp.value+"\t"+"|");
+			System.out.println("|\t"+temp.value+"\t|");
 			temp=temp.next;
 		}
 		System.out.println();
+		
 	}
 	
 	public void getTop() {
@@ -41,11 +43,10 @@ public class MyStack {
 		Node newNode=new Node(value);
 		if(height==0) {
 			top=newNode;
-			}
+		}
 		else {
 			newNode.next=top;
 			top=newNode;
-			
 			
 		}
 		height++;
@@ -56,13 +57,14 @@ public class MyStack {
 		if(height==0) {
 			System.out.println("Stack is empty");
 			return null;
-			}
+		}
 		if(height==1) {
 			top=null;
 		}
 		else {
 			top=top.next;
 			temp.next=null;
+			
 		}
 		height--;
 		return temp;

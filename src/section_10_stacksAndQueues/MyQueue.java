@@ -5,15 +5,13 @@ public class MyQueue {
 	private Node last;
 	private int length;
 	
-	
-	class Node{
-		int value;
-		Node next;
+	public class Node{
+		private int value;
+		private Node next;
 		
 		public Node(int value) {
 			this.value=value;
 		}
-		
 	}
 	
 	public MyQueue(int value) {
@@ -23,27 +21,26 @@ public class MyQueue {
 		length=1;
 	}
 	
-	public void getFirst() {
-		System.out.println("First:"+first.value);
-	}
-	
-	public void getLast() {
-		System.out.println("Last:"+last.value);
-	}
-	
 	public void getLength() {
 		System.out.println("Length:"+length);
 	}
 	
+	public void getFirst() {
+		System.out.println("First:"+first);
+	}
+	
+	public void getLast() {
+		System.out.println("Last:"+last);
+	}
+	
 	public void printQueue() {
 		Node temp=first;
-		System.out.print("first"+"\t");
+		System.out.print("first->");
 		while(temp!=null) {
-			System.out.print(temp.value+"\t");
+			System.out.print(temp.value+"->");
 			temp=temp.next;
 		}
-		System.out.print("last");
-		System.out.println();
+		System.out.println("last");
 	}
 	
 	public void enqueue(int value) {
@@ -55,6 +52,7 @@ public class MyQueue {
 		else {
 			last.next=newNode;
 			last=newNode;
+			
 			
 		}
 		length++;
@@ -78,6 +76,7 @@ public class MyQueue {
 		length--;
 		return temp;
 	}
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
