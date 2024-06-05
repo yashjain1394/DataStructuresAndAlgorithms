@@ -20,19 +20,22 @@ public class MyHashTable {
 	
 	public MyHashTable() {
 		dataMap=new Node[size];
+		
 	}
 	
-	public Integer hash(String key) {
+	public int hash(String key) {
 		int hash=0;
 		char[] keyChars=key.toCharArray();
 		for(int i=0;i<keyChars.length;i++) {
 			int asciiCode=keyChars[i];
 			hash=(hash+asciiCode*23)%dataMap.length;
+			
 		}
 		return hash;
+		
 	}
 	
-	public void set(String key,int value) {
+	public void set(String key, int value) {
 		Node newNode=new Node(key,value);
 		int index=hash(key);
 		if(dataMap[index]==null) {
@@ -44,21 +47,17 @@ public class MyHashTable {
 				temp=temp.next;
 			}
 			temp.next=newNode;
-			
-			
 		}
-		
-		
 	}
 	
 	public int get(String key) {
 		int index=hash(key);
 		Node temp=dataMap[index];
-		while(temp!=null) {
-			if(temp.key==key) {
-				return temp.value;
+		if(temp!=null) {
+			while(temp.key!=key) {
+				temp=temp.next;
 			}
-			temp=temp.next;
+			return temp.value;
 		}
 		return 0;
 		
@@ -74,7 +73,7 @@ public class MyHashTable {
 			}
 		}
 		return allKeys;
-		}
+	}
 	
 	public void printTable() {
 		for(int i=0;i<dataMap.length;i++) {
@@ -86,8 +85,8 @@ public class MyHashTable {
 			}
 			System.out.println();
 		}
-		
 	}
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

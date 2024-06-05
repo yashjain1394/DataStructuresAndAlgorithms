@@ -1,12 +1,12 @@
 package section_10_stacksAndQueues;
 
 public class MyStack {
-	private Node top;
-	private int height;
+	public Node top;
+	public int height;
 	
 	public class Node{
-		private int value;
-		private Node next;
+		public int value;
+		public Node next;
 		
 		public Node(int value) {
 			this.value=value;
@@ -17,18 +17,16 @@ public class MyStack {
 		Node newNode=new Node(value);
 		top=newNode;
 		height=1;
-		
 	}
 	
 	public void printStack() {
 		Node temp=top;
-		System.out.println("|\t"+"top"+"\t|");
+		System.out.println("\t|"+"top"+"|\t");
 		while(temp!=null) {
-			System.out.println("|\t"+temp.value+"\t|");
+			System.out.println("\t|"+temp.value+"|\t");
 			temp=temp.next;
 		}
 		System.out.println();
-		
 	}
 	
 	public void getTop() {
@@ -47,7 +45,6 @@ public class MyStack {
 		else {
 			newNode.next=top;
 			top=newNode;
-			
 		}
 		height++;
 	}
@@ -64,12 +61,11 @@ public class MyStack {
 		else {
 			top=top.next;
 			temp.next=null;
-			
 		}
 		height--;
 		return temp;
+		
 	}
-	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

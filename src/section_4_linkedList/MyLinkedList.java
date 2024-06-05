@@ -5,14 +5,13 @@ public class MyLinkedList {
 	private Node tail;
 	private int length;
 	
-	class Node{
+	public class Node{
 		private int value;
 		private Node next;
 		
-		public Node(int value){
+		public Node(int value) {
 			this.value=value;
-			}
-		
+		}
 	}
 	
 	public MyLinkedList(int value) {
@@ -20,7 +19,15 @@ public class MyLinkedList {
 		head=newNode;
 		tail=newNode;
 		length=1;
-		
+	}
+	
+	public void printList() {
+		Node temp=head;
+		while(temp!=null) {
+			System.out.print(temp.value+"->");
+			temp=temp.next;
+		}
+		System.out.println();
 	}
 	
 	public void getHead() {
@@ -35,25 +42,14 @@ public class MyLinkedList {
 		System.out.println("Length:"+length);
 	}
 	
-	public void printList() {
-		Node temp=head;
-		while(temp!=null) {
-			System.out.print(temp.value+"->");
-			temp=temp.next;
-		}
-		System.out.println();
-	}
-	
 	public void append(int value) {
 		Node newNode=new Node(value);
 		if(length==0) {
 			head=newNode;
 			tail=newNode;
-		}
-		else {
+		}else {
 			tail.next=newNode;
-			tail=newNode;
-			
+			tail=tail.next;
 		}
 		length++;
 	}
@@ -82,8 +78,7 @@ public class MyLinkedList {
 		return temp;
 	}
 	
-	public boolean insert(int index,int value) {
-		
+	public boolean insert(int index, int value) {
 		if(index<0 || index>length) {
 			return false;
 		}
@@ -112,7 +107,6 @@ public class MyLinkedList {
 		if(length==1) {
 			head=null;
 			tail=null;
-			
 		}
 		else {
 			head=head.next;
@@ -121,7 +115,6 @@ public class MyLinkedList {
 		}
 		length--;
 		return temp;
-		
 	}
 	
 	public Node removeLast() {
@@ -139,8 +132,9 @@ public class MyLinkedList {
 				prev=temp;
 				temp=temp.next;
 			}
-		tail=prev;
-		tail.next=null;
+			
+			tail=prev;
+			tail.next=null;
 			
 		}
 		length--;
@@ -148,7 +142,8 @@ public class MyLinkedList {
 	}
 	
 	public Node remove(int index) {
-		
+		Node prev=get(index-1);
+		Node temp=prev.next;
 		if(index<0 || index>=length) {
 			return null;
 		}
@@ -158,8 +153,6 @@ public class MyLinkedList {
 		if(index==length-1) {
 			return removeLast();
 		}
-		Node prev=get(index-1);
-		Node temp=prev.next;
 		prev.next=temp.next;
 		temp.next=null;
 		length--;
@@ -171,11 +164,8 @@ public class MyLinkedList {
 		if(temp!=null) {
 			temp.value=value;
 			return true;
-			
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 	
 	public void reverse() {
@@ -184,15 +174,14 @@ public class MyLinkedList {
 		Node after=temp.next;
 		head=tail;
 		tail=temp;
-		for(int i=0;i<length;i++) {
+		for(int i=0; i<length;i++) {
 			after=temp.next;
 			temp.next=before;
 			before=temp;
 			temp=after;
-			
 		}
+		
 	}
-	
 	
 	public static void main(String args[]) {
 		MyLinkedList myLinkedList=new MyLinkedList(1);

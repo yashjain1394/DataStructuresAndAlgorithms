@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MyGraph {
-	private HashMap<String,ArrayList<String>> adjList=new HashMap<>();
+	private HashMap<String, ArrayList<String>> adjList=new HashMap<>();
 	
 	public void printGraph() {
 		System.out.println(adjList);
-		
 	}
 	
 	public boolean addVertex(String vertex) {
 		if(adjList.get(vertex)==null) {
-			adjList.put(vertex,new ArrayList<String>());
+			adjList.put(vertex, new ArrayList<String>());
 			return true;
 		}
 		return false;
