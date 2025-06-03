@@ -1,97 +1,121 @@
 package section_4_linkedList;
 
-public class SimpleSinglyLinkedList {
+public class SinglyLinkedList {
 	private Node head;
 	
-	public class Node{
-		int value;
-		Node next;
+	class Node{
+		private int value;
+		private Node next;
 		
 		public Node(int value) {
 			this.value=value;
 		}
 	}
 	
-	public SimpleSinglyLinkedList(int value) {
+	public SinglyLinkedList(int value) {
 		Node newNode=new Node(value);
 		head=newNode;
 	}
 	
 	public int getLength() {
-		int length=0;
 		Node temp=head;
+		int length=0;
 		while(temp!=null) {
-			temp=temp.next;
 			length++;
+			temp=temp.next;
 		}
 		return length;
 	}
 	
-	public void getHead() {
-		System.out.println("Head="+head.value);
-	}
-	
 	public boolean insert(int index, int value) {
 		Node newNode=new Node(value);
-		if(index<0 || index>getLength()) {
+		int length=getLength();
+		if(index<0 || index>length) {
 			return false;
 		}
 		if(index==0) {
+			if(length==0) {
+				head=newNode;
+				return true;
+			}
 			newNode.next=head;
 			head=newNode;
 			return true;
 		}
 		else {
+			if(length==0) {
+				head=newNode;
+				return true;
+			}
 			Node prev=get(index-1);
 			newNode.next=prev.next;
 			prev.next=newNode;
 			return true;
+			
 		}
 	}
 	
 	public Node get(int index) {
+		Node temp=head;
 		if(index<0 || index>=getLength()) {
 			return null;
 		}
-		else {
-			Node temp=head;
-			for(int i=0;i<index;i++) {
-				temp=temp.next;
-			}
-			return temp;
+		for(int i=0;i<index;i++) {
+			temp=temp.next;
 		}
+		return temp;
+		
+	}
+	
+	public void printList() {
+		Node temp=head;
+		while(temp!=null){
+			System.out.print(temp.value+"->");
+			temp=temp.next;
+			
+		}
+		System.out.println();
+		
 	}
 	
 	public Node remove(int index) {
-		if(index<0||index>=getLength()) {
+		int length=getLength();
+		Node temp;
+		Node prev;
+		if(index<0 || index>=length) {
 			return null;
 		}
+		if(length==0) {
+			return null;
+		}
+		if(length==1) {
+			head=null;
+		}
 		if(index==0) {
-			Node temp=head;
+			
+			temp=head;
 			head=head.next;
 			temp.next=null;
 			return temp;
-		}else {
-			Node prev=get(index-1);
-			Node temp=prev.next;
+		}
+		if(index==length-1) {
+			prev=get(index-1);
+			temp=prev.next;
+			prev.next=null;
+			return temp;
+		}
+		else {
+			prev=get(index-1);
+			temp=prev.next;
 			prev.next=temp.next;
 			temp.next=null;
 			return temp;
 		}
 	}
-	
-	public void printList() {
-		Node temp=head;
-		while(temp!=null) {
-			System.out.print(temp.value+"->");
-			temp=temp.next;
-		}
-		System.out.println();
-	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SimpleSinglyLinkedList myLinkedList=new SimpleSinglyLinkedList(1);
+		SinglyLinkedList myLinkedList=new SinglyLinkedList(1);
 		myLinkedList.printList();
 		myLinkedList.insert(1,2);
 		myLinkedList.printList();
