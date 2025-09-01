@@ -4,7 +4,7 @@ public class ReverseString {
 
 
     public static String reverseString(String str){
-    	StackUsingArraylist<Character> stack=new StackUsingArraylist<Character>();
+    	Stack<Character> stack=new Stack<Character>();
         for(int i=0;i<(str.length());i++){
             stack.push(str.charAt(i));
         }

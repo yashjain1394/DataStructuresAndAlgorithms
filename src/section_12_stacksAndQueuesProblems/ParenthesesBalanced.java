@@ -4,7 +4,7 @@ public class ParenthesesBalanced {
 
     
     public static boolean isBalancedParentheses(String str){
-    	StackUsingArraylist<Character> stack=new StackUsingArraylist<Character>();
+    	Stack<Character> stack=new Stack<Character>();
         for(int i=0;i<str.length();i++){
             if(str.charAt(i)=='('){
                 stack.push(str.charAt(i));

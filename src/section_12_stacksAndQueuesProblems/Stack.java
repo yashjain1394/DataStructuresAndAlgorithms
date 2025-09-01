@@ -2,7 +2,7 @@ package section_12_stacksAndQueuesProblems;
 
 import java.util.ArrayList;
 
-public class StackUsingArraylist<T> {
+public class Stack<T> {
 
     
     private ArrayList<T> stackList = new ArrayList<>();  
@@ -52,7 +52,7 @@ public class StackUsingArraylist<T> {
 
     public static void main(String[] args) {
 
-    	StackUsingArraylist myStack = new StackUsingArraylist();
+    	Stack myStack = new Stack();
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
