@@ -1,4 +1,4 @@
-package section_15_hashTable;
+package section_16_hashTableProblems;
 
 import java.util.HashMap;
 

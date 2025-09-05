@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class MyHashTable {
 	private Node[] dataMap;
-	private int size=7;
 	
 	class Node{
 		String key;
@@ -18,7 +17,7 @@ public class MyHashTable {
 		
 	}
 	
-	public MyHashTable() {
+	public MyHashTable(int size) {
 		dataMap=new Node[size];
 		
 	}
@@ -90,7 +89,7 @@ public class MyHashTable {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		MyHashTable myHashTable=new MyHashTable();
+		MyHashTable myHashTable=new MyHashTable(7);
 		myHashTable.set("nails", 100);
 		myHashTable.set("tile", 50);
 		myHashTable.set("lumber", 80);
