@@ -8,9 +8,9 @@ public class RecursiveBinarySearchTreePractice {
 	private Node root;
 	
 	public class Node{
-		int value;
-		Node left;
-		Node right;
+		private int value;
+		private Node left;
+		private Node right;
 		
 		public Node(int value) {
 			this.value=value;
@@ -18,81 +18,83 @@ public class RecursiveBinarySearchTreePractice {
 	}
 	
 	public void rInsert(int value) {
+		Node newNode=new Node(value);
 		if(root==null) {
-			root=new Node(value);
+			root=newNode;
 		}
-		else {
-			rInsert(root, value);
-		}
-		
+		rInsert(root, value);
 	}
 	
-	public Node rInsert(Node currentNode,int value) {
+	public Node rInsert(Node currentNode, int value) {
 		if(currentNode==null) {
 			return new Node(value);
 		}
-		if(currentNode.value==value) {
+		if(value==currentNode.value) {
 			return null;
 		}
 		if(value<currentNode.value) {
 			currentNode.left=rInsert(currentNode.left, value);
 		}
-		else if(value>currentNode.value){
+		else if(value>currentNode.value) {
 			currentNode.right=rInsert(currentNode.right, value);
 		}
 		
-		return currentNode;
+		 return currentNode;
 	}
 	
-	public boolean rContains(int value) {
-		return rContains(root,value);
-	}
-	
-	public boolean rContains(Node currentNode,int value) {
-		if(currentNode.value==value) {
-			return true;
-		}
-		if(currentNode==null) {
+	public boolean rContains(int value){
+		if(root ==null) {
 			return false;
+		}
+		return rContains(root, value);
+		
+	}
+	
+	public boolean rContains(Node currentNode, int value) {
+		if(value==currentNode.value) {
+			return true;
 		}
 		if(value<currentNode.value) {
 			return rContains(currentNode.left,value);
-			
 		}
-		else {
+		else if(value>currentNode.value) {
 			return rContains(currentNode.right,value);
 		}
+		return false;	
 	}
 	
 	public void rDelete(int value) {
-		
+		if(root==null) {
+			System.out.println("BST is empty");
+		}
 		rDelete(root,value);
 	}
 	
-	public Node rDelete(Node currentNode, int value) {
+	public Node rDelete(Node currentNode,int value) {
 		if(currentNode==null) {
 			return null;
 		}
 		if(value<currentNode.value) {
-			currentNode.left=rDelete(currentNode.left, value);
+			currentNode.left=rDelete(currentNode.left,value);
 		}
 		else if(value>currentNode.value) {
-			currentNode.right=rDelete(currentNode.right, value);
+			currentNode.right=rDelete(currentNode.right,value);
 		}
 		else {
 			if(currentNode.left==null && currentNode.right==null) {
 				return null;
 			}
-			else if(currentNode.left==null & currentNode.right!=null) {
-				currentNode=currentNode.right;
-			}
-			else if(currentNode.right==null && currentNode.left!=null) {
+			else if(currentNode.left!=null && currentNode.right==null) {
 				currentNode=currentNode.left;
+			}
+			else if(currentNode.left==null && currentNode.right!=null) {
+				currentNode=currentNode.right;
 			}
 			else {
 				int subTreeMin=minValue(currentNode.right);
 				currentNode.value=subTreeMin;
-				currentNode.right=rDelete(currentNode.right, subTreeMin);
+				currentNode.right=rDelete(currentNode.right,subTreeMin);
+				
 			}
 		}
 		return currentNode;
@@ -118,14 +120,8 @@ public class RecursiveBinarySearchTreePractice {
 			if(currentNode.right!=null) {
 				queue.add(currentNode.right);
 			}
-			
-			
 		}
-		
 		return results;
-		
-		
-		
 	}
 	
 	public ArrayList<Integer> DFSPreOrder(){
@@ -136,8 +132,8 @@ public class RecursiveBinarySearchTreePractice {
 				if(currentNode.left!=null) {
 					new Traverse(currentNode.left);
 				}
-				if(currentNode.right!=null){
-					new Traverse(currentNode.right);
+				if(currentNode.right!=null) {
+				   new Traverse(currentNode.right);
 				}
 			}
 			
@@ -150,31 +146,28 @@ public class RecursiveBinarySearchTreePractice {
 		ArrayList<Integer> results=new ArrayList<>();
 		class Traverse{
 			public Traverse(Node currentNode) {
-				
 				if(currentNode.left!=null) {
 					new Traverse(currentNode.left);
 				}
 				results.add(currentNode.value);
-				if(currentNode.right!=null){
+				if(currentNode.right!=null) {
 					new Traverse(currentNode.right);
 				}
 			}
-			
 		}
 		new Traverse(root);
 		return results;
+		
 	}
 	
 	public ArrayList<Integer> DFSPostOrder(){
 		ArrayList<Integer> results=new ArrayList<>();
 		class Traverse{
 			public Traverse(Node currentNode) {
-				
 				if(currentNode.left!=null) {
 					new Traverse(currentNode.left);
 				}
-				
-				if(currentNode.right!=null){
+				if(currentNode.right!=null) {
 					new Traverse(currentNode.right);
 				}
 				results.add(currentNode.value);

@@ -10,81 +10,87 @@ public class SinglyLinkedListPractice {
 		
 		public Node(int value) {
 			this.value=value;
-			
 		}
+		
 	}
 	
 	public SinglyLinkedListPractice(int value) {
 		Node newNode=new Node(value);
 		head=newNode;
 		length=1;
+		
 	}
 	
 	public void printList() {
-		Node temp=head;
-		while(temp!=null) {
-			System.out.print(temp.value+"->");
-			temp=temp.next;
+		Node current=head;
+		while(current!=null) {
+			System.out.print(current.value+"->");
+			current=current.next;
 		}
 		System.out.println();
-		
 	}
 	
-	public boolean insert(int index, int value) {
-		Node newNode=new Node(value);
+	public boolean insert(int index,int value) {
 		if(index<0 || index>length) {
 			return false;
 		}
-		
-		if(index==0) {
-			newNode.next=head;
+		Node newNode=new Node(value);
+		if(length==0) {
 			head=newNode;
 			length++;
-			return true;
-				
+		}
+		else if(index==0) {
+			newNode.next=head;
+			head=head.next;
+			length++;
 		}
 		else {
-			Node prev=get(index-1);
-			newNode.next=prev.next;
-			prev.next=newNode;
+			Node prevNode=get(index-1);
+			newNode.next=prevNode.next;
+			prevNode.next=newNode;
 			length++;
-			return true;
 		}
+		return true;
 	}
 	
-	public Node get(int index){
+	public Node get(int index) {
 		if(index<0 || index>=length) {
 			return null;
 		}
-		Node temp=head;
+		Node current=head;
 		for(int i=0;i<index;i++) {
-			temp=temp.next;
+			current=current.next;
 		}
-		return temp;
-		
+		return current;
 	}
 	
 	public Node remove(int index) {
 		if(index<0 || index>=length) {
 			return null;
 		}
-		
-		if(index==0) {
-			Node temp=head;
-			head=head.next;
-			temp.next=null;
-			length--;
-			return temp;	
+		if(length==0) {
+			return null;
 		}
-		else {
-			Node prev=get(index-1);
-			Node temp=prev.next;
-			prev.next=temp.next;
-			temp.next=null;
+		Node current=head;
+		if(length==1) {
+			head=null;
 			length--;
-			return temp;
+		}
+		else if(index==0) {
+			head=head.next;
+			current.next=null;
+			length--;
 			
 		}
+		else {
+			Node prevNode=get(index-1);
+			current=prevNode.next;
+			prevNode.next=current.next;
+			current.next=null;
+			length--;
+		}
+		
+		return current;
 	}
 	
 	public void reverse() {
