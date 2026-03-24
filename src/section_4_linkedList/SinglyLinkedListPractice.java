@@ -11,43 +11,41 @@ public class SinglyLinkedListPractice {
 		public Node(int value) {
 			this.value=value;
 		}
-		
 	}
 	
 	public SinglyLinkedListPractice(int value) {
 		Node newNode=new Node(value);
 		head=newNode;
 		length=1;
-		
 	}
 	
 	public void printList() {
-		Node current=head;
-		while(current!=null) {
-			System.out.print(current.value+"->");
-			current=current.next;
+		Node temp=head;
+		while(temp!=null) {
+			System.out.print(temp.value+"->");
+			temp=temp.next;
 		}
 		System.out.println();
 	}
 	
-	public boolean insert(int index,int value) {
+	public boolean insert(int index, int value) {
+		Node newNode=new Node(value);
 		if(index<0 || index>length) {
 			return false;
 		}
-		Node newNode=new Node(value);
 		if(length==0) {
 			head=newNode;
 			length++;
 		}
-		else if(index==0) {
+		if(index==0) {
 			newNode.next=head;
-			head=head.next;
+			head=newNode;
 			length++;
 		}
 		else {
-			Node prevNode=get(index-1);
-			newNode.next=prevNode.next;
-			prevNode.next=newNode;
+			Node before=get(index-1);
+			newNode.next=before.next;
+			before.next=newNode;
 			length++;
 		}
 		return true;
@@ -57,52 +55,53 @@ public class SinglyLinkedListPractice {
 		if(index<0 || index>=length) {
 			return null;
 		}
-		Node current=head;
+		Node temp=head;
 		for(int i=0;i<index;i++) {
-			current=current.next;
+			temp=temp.next;
 		}
-		return current;
+		return temp;
 	}
 	
 	public Node remove(int index) {
+		Node temp=head;
 		if(index<0 || index>=length) {
 			return null;
 		}
 		if(length==0) {
-			return null;
+			System.out.println("List is empty");
 		}
-		Node current=head;
 		if(length==1) {
-			head=null;
+			head=temp;
 			length--;
 		}
-		else if(index==0) {
+		if(index==0) {
 			head=head.next;
-			current.next=null;
-			length--;
-			
+			temp.next=null;
+			length--;	
 		}
 		else {
-			Node prevNode=get(index-1);
-			current=prevNode.next;
-			prevNode.next=current.next;
-			current.next=null;
+			Node before=get(index-1);
+			temp=before.next;
+			Node after=temp.next;
+			before.next=after;
+			temp.next=null;
 			length--;
 		}
-		
-		return current;
+		return temp;
 	}
 	
 	public void reverse() {
 		Node before=null;
 		Node current=head;
-		Node after;
+		Node after=null;
+		
 		while(current!=null) {
 			after=current.next;
 			current.next=before;
 			before=current;
 			current=after;
 		}
+		
 		head=before;
 	}
 	

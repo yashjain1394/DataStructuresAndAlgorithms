@@ -1,18 +1,17 @@
 package section_10_stacksAndQueues;
 
 public class QueuePractice {
-	private int length;
 	private Node first;
 	private Node last;
+	private int length;
 	
-	public class Node {
+	public class Node{
 		private int value;
 		private Node next;
 		
 		public Node(int value) {
 			this.value=value;
 		}
-		
 	}
 	
 	public QueuePractice(int value) {
@@ -23,51 +22,47 @@ public class QueuePractice {
 	}
 	
 	public void printQueue() {
-		Node currentNode=first;
+		Node temp=first;
 		System.out.print("first->");
-		while(currentNode!=null) {
-			System.out.print(currentNode.value+"->");
-			currentNode=currentNode.next;
+		while(temp!=null) {
+			System.out.print(temp.value+"->");
+			temp=temp.next;
 		}
 		System.out.print("last");
 		System.out.println();
 	}
 	
-	public boolean enqueue(int value) {
+	public void enqueue(int value) {
 		Node newNode=new Node(value);
 		if(length==0) {
 			first=newNode;
 			last=newNode;
-		}
-		else
-		{
+		}else {
 			last.next=newNode;
 			last=newNode;
-			
 		}
 		length++;
-		return true;
 	}
 	
 	public Node dequeue() {
-		Node currentNode=first;
-		if(length==0)
-		{
+		Node temp=first;
+		if(length==0) {
 			System.out.println("Queue is empty");
 			return null;
 		}
-		if(length==1) {
+		else if(length==1) {
 			first=null;
 			last=null;
 		}
 		else {
 			first=first.next;
-			currentNode.next=null;
+			temp.next=null;
 			
 		}
 		length--;
-		return currentNode;
+		return temp;
 	}
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

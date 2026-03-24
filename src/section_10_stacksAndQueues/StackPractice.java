@@ -3,10 +3,9 @@ package section_10_stacksAndQueues;
 public class StackPractice {
 	private Node top;
 	private int height;
-	
 	public class Node{
-		private int value;
 		private Node next;
+		private int value;
 		
 		public Node(int value) {
 			this.value=value;
@@ -17,47 +16,47 @@ public class StackPractice {
 		Node newNode=new Node(value);
 		top=newNode;
 		height=1;
-		
 	}
 	
 	public void printStack() {
-		Node currentNode=top;
+		Node temp=top;
 		System.out.println("\t"+"top"+"\t");
-		while(currentNode!=null) {
-			System.out.println("\t|"+currentNode.value+"|\t");
-			currentNode=currentNode.next;
+		while(temp!=null){
+			System.out.println("\t|"+temp.value+"|\t");
+			temp=temp.next;
 		}
 		System.out.println();
 	}
 	
-	public boolean push(int value) {
+	public void push(int value) {
 		Node newNode=new Node(value);
 		if(height==0) {
 			top=newNode;
+			
 		}
 		else {
 			newNode.next=top;
 			top=newNode;
 		}
 		height++;
-		return true;
 	}
 	
 	public Node pop() {
-		Node currentNode=top;
+		Node temp=top;
 		if(height==0) {
 			System.out.println("Stack is empty");
 			return null;
 		}
-		if(height==1) {
+		else if(height==1) {
 			top=null;
+			
 		}
 		else {
 			top=top.next;
-			currentNode.next=null;
+			temp.next=null;
 		}
 		height--;
-		return currentNode;
+		return temp;
 	}
 	
 	public static void main(String[] args) {
